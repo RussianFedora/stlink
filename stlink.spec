@@ -5,7 +5,7 @@ Summary:        STM32 discovery line Linux programmer
 License:        BSD
 
 Url:            https://github.com/texane/stlink
-Source0:        https://github.com/texane/stlink/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0:        %{url}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  automake
@@ -19,7 +19,7 @@ STLINK v1/v2 JTAG/SWD debugging/flashing tool for STM32 microcontrollers.
 
 %package        gui
 Summary:        GUI for STM32 discovery line linux programmer
-Requires:       %{name} = %{version}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description    gui
 STLINK v1/v2 JTAG/SWD debugging/flashing tool for STM32 microcontrollers.
