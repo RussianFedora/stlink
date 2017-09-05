@@ -7,8 +7,7 @@ License:        BSD
 Url:            https://github.com/texane/stlink
 Source0:        %{url}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-BuildRequires:  autoconf
-BuildRequires:  automake
+BuildRequires:  cmake
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(udev)
 BuildRequires:  pkgconfig(libusb-1.0)
@@ -58,7 +57,7 @@ popd
 %{udev_rules_update}
 
 %files
-%doc README.md
+%doc README.md ChangeLog.md
 %license LICENSE
 %config(noreplace) %{_sysconfdir}/modprobe.d/%{name}*
 %{_bindir}/st-*
