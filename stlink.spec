@@ -1,16 +1,18 @@
 Name:           stlink
 Version:        1.4.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        STM32 discovery line Linux programmer
 License:        BSD
 
 Url:            https://github.com/texane/stlink
-Source0:        %{url}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+Source1:        stlink.desktop
 
 BuildRequires:  cmake
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(udev)
 BuildRequires:  pkgconfig(libusb-1.0)
+BuildRequires:  desktop-file-utils
 Requires:       pkgconfig(udev)
 
 %description
@@ -47,6 +49,8 @@ popd
 pushd build
     %make_install
 popd
+rm %{buildroot}%{_libdir}/lib%{name}.a
+desktop-file-install --dir="%{buildroot}%{_datadir}/applications" %{SOURCE1}
 
 %post
 /sbin/ldconfig
@@ -68,14 +72,19 @@ popd
 %files gui
 %{_bindir}/%{name}-gui
 %{_datadir}/%{name}
+%{_datadir}/applications/%{name}.desktop
 
 %files    devel
 %{_includedir}/%{name}*
 %{_libdir}/lib%{name}-shared.so
-%{_libdir}/lib%{name}.a
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Wed Sep 06 2017 Vasiliy N. Glazov <vascom2@gmail.com> - 1.4.0-2
+- Corrected Source0 url
+- Added desktop file
+- Removed static library
+
 * Fri Sep 01 2017 Vasiliy N. Glazov <vascom2@gmail.com> - 1.4.0-1
 - Update to 1.4.0
 
